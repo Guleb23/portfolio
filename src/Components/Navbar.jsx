@@ -1,7 +1,9 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import socials from '../Constants';
+import socials, { navLinks } from '../Constants';
+import ScrollToPlugin from 'gsap/ScrollToPlugin';
+gsap.registerPlugin(ScrollToPlugin);
 
 const Navbar = () => {
     const navRef = useRef(null);
@@ -9,20 +11,19 @@ const Navbar = () => {
     const btmRef = useRef(null);
     const linksRef = useRef([]);
     const [isOpen, setIsOpen] = useState(false);
-    const [ready, setReady] = useState(false); // ждём монтирования
+    const [ready, setReady] = useState(false);
 
-    const navLinks = ['Главная', 'Услуги', 'Обо мне', 'Работы', 'Контакты'];
 
-    // Устанавливаем начальное положение один раз
+
+
     useGSAP(() => {
         if (navRef.current) {
             gsap.set(navRef.current, { xPercent: 100 });
             gsap.set(linksRef.current, { xPercent: 20, opacity: 0 });
         }
-        setReady(true); // теперь можно анимировать
+        setReady(true);
     }, []);
 
-    // Основная анимация — только когда ready === true
     useGSAP(() => {
         if (!ready) return;
 
@@ -61,6 +62,8 @@ const Navbar = () => {
         }
     }, [isOpen, ready]);
 
+
+
     return (
         <>
             <nav
@@ -74,9 +77,13 @@ const Navbar = () => {
                             key={index}
                             className="will-change-transform"
                         >
-                            <a className="transition-all duration-300 cursor-pointer hover:text-white">
-                                {link}
-                            </a>
+                            <p onClick={(e) => {
+                                e.preventDefault();
+                                gsap.to(window, { duration: 2, scrollTo: `#${link.id}` });
+                                setIsOpen(!isOpen);
+                            }} className="transition-all duration-300 cursor-pointer hover:text-white">
+                                {link.name}
+                            </p>
                         </div>
                     ))}
                 </div>

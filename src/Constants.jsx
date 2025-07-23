@@ -94,7 +94,28 @@ export const servicesData = [
         ],
     },
 ];
-
+export const navLinks = [
+    {
+        name: 'Главная',
+        id: 'hero'
+    },
+    {
+        name: 'Услуги',
+        id: 'services'
+    },
+    {
+        name: 'Обо мне',
+        id: '1'
+    },
+    {
+        name: 'Работы',
+        id: '12'
+    },
+    {
+        name: 'Контакты',
+        id: '13'
+    },
+];
 
 
 
