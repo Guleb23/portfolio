@@ -7,13 +7,19 @@ import Header from "./Header";
 import Paragraph from "./Paragraph";
 
 
-const TextComponent = () => {
+const TextComponent = ({ title = null, paragraph = null, inputText = null, textColor = "black" }) => {
     const headerRef = useRef(null);
+    const allTextBlockRef = useRef(null);
     const textRef = useRef(null);
     useGSAP(() => {
         const textSplit = SplitText.create(textRef.current, { type: "lines" });
 
-        const tl = gsap.timeline();
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: allTextBlockRef.current.parentNode,
+                start: "top 80%"
+            }
+        });
 
         tl.from(headerRef.current, {
             xPercent: -50,
@@ -31,13 +37,13 @@ const TextComponent = () => {
         }, "<")
     }, [])
     return (
-        <div >
-            <div className="" style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}>
-                <Header headerRef={headerRef} />
+        <div ref={allTextBlockRef} style={{ color: textColor }}>
+            <div style={{ clipPath: "polygon(0 0, 100% 0, 100% 100%, 0% 100%)" }}>
+                <Header inputParagraph={paragraph} title={title} headerRef={headerRef} />
             </div>
-            <div className="relative px=10 text-black">
+            <div className="relative px-10 ">
                 <div className="absolute inset-x-0 border-t-2" />
-                <Paragraph textRef={textRef} />
+                <Paragraph inputText={inputText} textRef={textRef} />
             </div>
         </div>
     )
