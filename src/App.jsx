@@ -7,6 +7,7 @@ import ScrollSmoother from 'gsap/ScrollSmoother'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import AboutServices from './Sections/AboutServices'
+import Work from './Sections/Work'
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -29,6 +30,7 @@ const App = () => {
           <Hero />
           <Service />
           <AboutServices />
+          <Work />
           <div className='h-screen '>
           </div>
         </div>

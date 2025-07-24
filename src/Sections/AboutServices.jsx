@@ -29,25 +29,7 @@ const AboutServices = () => {
             ease: "power1.inOut",
             stagger: 0.2
         })
-        // Анимация элементов внутри карточек
-        servicesRef.current.forEach(card => {
-            if (card) {
-                const elements = card.querySelectorAll('.items-cards');
-                gsap.from(elements, {
-                    xPercent: -50,
-                    opacity: 0,
-                    duration: 0.8,
-                    stagger: 0.1,
-                    scrollTrigger: {
-                        trigger: card,
-                        start: "top 80%",
-                        end: "bottom 60%",
-                        scrub: true,
-                        toggleActions: "play none none none"
-                    }
-                });
-            }
-        });
+
 
 
 

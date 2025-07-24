@@ -118,5 +118,81 @@ export const navLinks = [
 ];
 
 
+export const projects = [
+    {
+        id: 1,
+        name: "Лендинг для Splyt",
+        description:
+            "An online store specializing in phone accessories including cases, chargers, cables, and power banks with MagSafe compatibility.",
+        href: "",
+        image: "/assets/MyProjects/Awwards/awwardPreview.png",
+        bgImage: "/assets/backgrounds/blanket.jpg",
 
+        frameworks: [
+            { id: 1, name: "React" },
+            { id: 2, name: "Tailwind CSS" },
+            { id: 3, name: "GSAP" }
+        ],
+    },
+    {
+        id: 2,
+        name: "Система учета продуктов",
+        description:
+            "An online store specializing in rare and decorative plants with a clean, user-friendly interface.",
+        href: "",
+        image: "/assets/MyProjects/Orders/ordersPreview.png",
+        bgImage: "/assets/backgrounds/curtains.jpg",
+        frameworks: [
+            { id: 1, name: "React" },
+            { id: 2, name: "Chakra UI" },
+            { id: 3, name: "ASP.NET CORE" },
+            { id: 4, name: "EF CORE" },
+            { id: 5, name: "Minimal API" },
+        ],
+    },
+    {
+        id: 3,
+        name: "Лендинг для бара",
+        description:
+            "An e-commerce platform for Apple products and accessories with deals and category filtering.",
+        href: "",
+        image: "/assets/MyProjects/Mojito/mojitoPreview.png",
+        bgImage: "/assets/backgrounds/map.jpg",
+        frameworks: [
+            { id: 1, name: "React" },
+            { id: 2, name: "Tailwind CSS" },
+            { id: 3, name: "GSAP" }
+        ],
+    },
+    {
+        id: 4,
+        name: "Веб-приложение для путешествий",
+        description:
+            "A multi-category online shop featuring electronics, home appliances, and gaming gear with special offers.",
+        href: "",
+        image: "/assets/MyProjects/Travel/travelPreview.png",
+        bgImage: "/assets/backgrounds/poster.jpg",
+        frameworks: [
+            { id: 1, name: "React" },
+            { id: 2, name: "Tailwind CSS" },
+            { id: 3, name: "ASP.NET CORE" },
+            { id: 4, name: "EF CORE" },
+            { id: 5, name: "Minimal API" },
+            { id: 6, name: "Leaflet API" },
+        ],
+    },
+    {
+        id: 5,
+        name: "Brainvawe лендинг",
+        description:
+            "A curated collection of designer home decor items, including furniture and artisan vases.",
+        href: "",
+        image: "/assets/MyProjects/Brainwave/brainwavePreview.png",
+        bgImage: "/assets/backgrounds/table.jpg",
+        frameworks: [
+            { id: 1, name: "React" },
+            { id: 2, name: "Tailwind CSS" },
+        ],
+    }
+];
 export default socials;
