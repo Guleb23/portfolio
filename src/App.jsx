@@ -1,18 +1,17 @@
-
-import Navbar from './Components/Navbar'
-import Hero from './Sections/Hero'
-import Service from './Sections/Service'
 import ScrollTrigger from 'gsap/ScrollTrigger'
 import ScrollSmoother from 'gsap/ScrollSmoother'
 import gsap from 'gsap'
-import { useGSAP } from '@gsap/react'
-import AboutServices from './Sections/AboutServices'
-import Work from './Sections/Work'
+import { useGSAP } from '@gsap/react';
+import { Outlet, useLocation } from 'react-router-dom';
+import GlobalNavbar from './Components/GlobalNavbar';
+import Navbar from "./Components/Navbar"
+
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 const App = () => {
+  const location = useLocation();
   useGSAP(() => {
     ScrollSmoother.create({
       smooth: 1.5,
@@ -24,17 +23,14 @@ const App = () => {
   }, []);
   return (
     <main className='relative min-h-screen w-full overflow-x-auto'>
-      <Navbar />
+      <GlobalNavbar />
+      {location.pathname === "/" && <Navbar />}
       <div id="smooth-wrapper">
         <div id="smooth-content">
-          <Hero />
-          <Service />
-          <AboutServices />
-          <Work />
-          <div className='h-screen '>
-          </div>
+          <Outlet />
         </div>
       </div>
+
     </main>
   )
 }
