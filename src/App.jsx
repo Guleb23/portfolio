@@ -23,7 +23,6 @@ const App = () => {
   }, []);
   return (
     <main className='relative min-h-screen w-full overflow-x-auto'>
-      <GlobalNavbar />
       {location.pathname === "/" && <Navbar />}
       <div id="smooth-wrapper">
         <div id="smooth-content">

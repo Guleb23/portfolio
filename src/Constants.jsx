@@ -1,6 +1,24 @@
 import { FaGithub, FaTelegram } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
 
+
+
+
+
+
+
+const allFiles = import.meta.glob(
+    '/public/assets/MyProjects/*/slides/*.{png,jpg,jpeg,webp}',
+    { eager: false, as: 'raw' }
+);
+
+const generatePathForImages = (projName) => {
+    return Object.keys(allFiles)
+        .filter(path => path.includes(`/MyProjects/${projName}/slides/`))
+        .map(path => path.replace('/public', ''));
+};
+
+
 const socials = [
     {
         link: "https://github.com/Guleb23",
@@ -104,16 +122,12 @@ export const navLinks = [
         id: 'services'
     },
     {
-        name: 'Обо мне',
-        id: '1'
-    },
-    {
         name: 'Работы',
-        id: '12'
+        id: 'works'
     },
     {
         name: 'Контакты',
-        id: '13'
+        id: 'contact'
     },
 ];
 
@@ -123,11 +137,13 @@ export const projects = [
         id: 1,
         name: "Лендинг для Splyt",
         description:
-            "An online store specializing in phone accessories including cases, chargers, cables, and power banks with MagSafe compatibility.",
-        href: "",
+            "Современный одностраничник с яркими анимациями и адаптивным дизайном. Реализована насыщенная анимация через GSAP, плавные переходы и интерактив. Чистый интерфейс на Tailwind CSS, компонентная структура на React. Идеально работает на всех устройствах",
+        href: "https://awwars.vercel.app/",
         image: "/assets/MyProjects/Awwards/awwardPreview.png",
+        images: generatePathForImages("Awwards"),
         bgImage: "/assets/backgrounds/blanket.jpg",
 
+        git: "https://github.com/Guleb23/awwars",
         frameworks: [
             { id: 1, name: "React" },
             { id: 2, name: "Tailwind CSS" },
@@ -138,10 +154,12 @@ export const projects = [
         id: 2,
         name: "Система учета продуктов",
         description:
-            "An online store specializing in rare and decorative plants with a clean, user-friendly interface.",
+            "Полноценное CRUD-приложение с нуля: сервер на ASP.NET Core с Minimal API и EF Core, реализована бизнес-логика покупок, продаж, скидок и управления товаром.На фронте — адаптивный интерфейс со сменой темы, диаграммами и удобной навигацией. Использован Chakra UI для быстрой и стильной верстки",
         href: "",
         image: "/assets/MyProjects/Orders/ordersPreview.png",
+        images: generatePathForImages("Orders"),
         bgImage: "/assets/backgrounds/curtains.jpg",
+        git: "https://github.com/Guleb23/Web-application-for-sales-accounting-master--1-",
         frameworks: [
             { id: 1, name: "React" },
             { id: 2, name: "Chakra UI" },
@@ -154,10 +172,12 @@ export const projects = [
         id: 3,
         name: "Лендинг для бара",
         description:
-            "An e-commerce platform for Apple products and accessories with deals and category filtering.",
-        href: "",
+            "Атмосферный лендинг с анимацией — создан для привлечения гостей и передачи вайба заведения.Эффекты на GSAP добавляют динамики, адаптивный дизайн идеально смотрится на всех устройствах. Tailwind CSS обеспечил быстрый и чистый UI, а React — модульность и масштабируемость",
+        href: "https://mojito-smoky.vercel.app/",
         image: "/assets/MyProjects/Mojito/mojitoPreview.png",
+        images: generatePathForImages("Mojito"),
         bgImage: "/assets/backgrounds/map.jpg",
+        git: "https://github.com/Guleb23/mojito",
         frameworks: [
             { id: 1, name: "React" },
             { id: 2, name: "Tailwind CSS" },
@@ -168,10 +188,13 @@ export const projects = [
         id: 4,
         name: "Веб-приложение для путешествий",
         description:
-            "A multi-category online shop featuring electronics, home appliances, and gaming gear with special offers.",
+            "Функциональное приложение для планирования маршрутов. Реализована регистрация и авторизация с использованием access/refresh токенов и хешированием паролей.Пользователи могут создавать маршруты по точкам с расчётом времени и отображением на карте (Leaflet) в реальном времени.Есть общая лента маршрутов с возможностью делиться поездками, реализована пагинация",
         href: "",
         image: "/assets/MyProjects/Travel/travelPreview.png",
+        images: generatePathForImages("Travel"),
+
         bgImage: "/assets/backgrounds/poster.jpg",
+        git: "https://github.com/Guleb23/ApiForTravel",
         frameworks: [
             { id: 1, name: "React" },
             { id: 2, name: "Tailwind CSS" },
@@ -185,10 +208,12 @@ export const projects = [
         id: 5,
         name: "Brainvawe лендинг",
         description:
-            "A curated collection of designer home decor items, including furniture and artisan vases.",
-        href: "",
+            "Современный лендинг с чистым и минималистичным дизайном. Выполнен на React с использованием Tailwind CSS для быстрой адаптивной вёрстки. Акцент на типографику, структуру и визуальную подачу. Подходит для презентации digital-продукта или IT-сервиса",
+        href: "https://brain-wave-smoky.vercel.app/",
         image: "/assets/MyProjects/Brainwave/brainwavePreview.png",
+        images: generatePathForImages("Brainwave"),
         bgImage: "/assets/backgrounds/table.jpg",
+        git: "https://github.com/Guleb23/brainWave",
         frameworks: [
             { id: 1, name: "React" },
             { id: 2, name: "Tailwind CSS" },

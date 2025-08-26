@@ -4,6 +4,7 @@ import { projects } from '../Constants'
 import { Icon } from '@iconify/react/dist/iconify.js'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { useNavigate } from 'react-router-dom'
 
 const Work = () => {
     const [currentIndex, setCurrentIndex] = useState(null)
@@ -11,6 +12,7 @@ const Work = () => {
     const mouse = useRef({ x: 0, y: 0 });
     const moveX = useRef(null);
     const moveY = useRef(null);
+    const navigate = useNavigate();
     useGSAP(() => {
         moveX.current = gsap.quickTo(previewRef.current, "x", {
             duration: 1.5,
@@ -19,6 +21,21 @@ const Work = () => {
         moveY.current = gsap.quickTo(previewRef.current, "y", {
             duration: 2,
             ease: "power3.out"
+        })
+
+        gsap.from("#project", {
+            opacity: 0,
+            y: 100,
+            stagger: 1,
+            duration: 1,
+            ease: "back.out",
+            delay: 0.5,
+            scrollTrigger: {
+                trigger: "#project",
+                scrub: true,
+
+                end: "center center"
+            }
         })
     }, [])
 
@@ -33,6 +50,14 @@ const Work = () => {
             duration: 0.4,
             ease: "power2.out"
         })
+        gsap.to(`#overlay_${index}`, {
+            clipPath: "polygon(0 100%, 100% 100%, 100% 0%, 0 0%)",
+            duration: 0.4
+        })
+        gsap.to(`#border_${index}`, {
+            backgroundColor: "white",
+            duration: 0.4
+        })
     }
     const handleMouseLeave = (index) => {
         if (window.innerWidth < 768) {
@@ -45,6 +70,16 @@ const Work = () => {
             duration: 0.4,
             ease: "power2.out"
         })
+        gsap.to(`#overlay_${index}`, {
+            clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)",
+            duration: 0.4
+        })
+
+        gsap.to(`#border_${index}`, {
+            backgroundColor: "black",
+            duration: 0.4
+        })
+
     }
 
     const handleMouseMove = (e) => {
@@ -57,36 +92,46 @@ const Work = () => {
         moveX.current(mouse.current.x);
         moveY.current(mouse.current.y);
     }
+
+    const handleGoToProject = (id) => {
+        navigate(`/project/${id}`)
+    }
     return (
         <section id='works' className='flex flex-col min-h-screen relative'>
             <TextComponent textColor={`black`} title={`Проекты`} inputText={`Проекты, которые работают: продуманные и эффективные.`} paragraph={`Логика и эстетика в идеальном балансе`} />
-            <div onMouseMove={handleMouseMove} className='relative flex flex-col font-light'>
+            <div onMouseMove={handleMouseMove} className='relative flex flex-col font-light '>
                 {projects.map((project, index) => (
-                    <div key={index} id='project' className='relative flex flex-col gap-1 py-5 cursor-pointer group md:gap-0'
+                    <div key={index} onClick={() => { handleGoToProject(project.id) }} id='project' className='relative flex flex-col gap-1 py-5 cursor-pointer group md:gap-0'
                         onMouseEnter={() => {
                             handleMouseEnter(index);
                         }}
                         onMouseLeave={() => {
                             handleMouseLeave(index);
                         }}>
-                        <div className='flex justify-between px-10 text-black transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white'>
-                            <h2 className='lg:text-[32px] text-[26px] leading-none'>{project.name}
-                            </h2>
-                            <Icon icon="tabler:arrow-up-right" className='md:size-6 size-5' />
-                        </div>
-                        <div className='w-full h-0.5 bg-black/80' />
+                        <div className='z-10'>
 
-                        <div className='flex px-10 text-xs leading-loose uppercase transition-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12'>
-                            {project.frameworks.map((framework) => (
-                                <p key={framework.id} className='text-black transition-colors duration-500 md:group-hover:text-white'>
-                                    {framework.name}
-                                </p>
-                            ))}
-                        </div>
+                            <div className='flex justify-between px-10 text-black transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white '>
+                                <h2 className='lg:text-[32px] text-[26px] leading-none'>{project.name}
+                                </h2>
+                                <Icon icon="tabler:arrow-up-right" className='md:size-6 size-5' />
+                            </div>
+                            <div className='w-full h-0.5 bg-black/80' id={`border_${index}`} />
 
-                        <div className='relative flex items-center justify-center px-10 md:hidden h-[400px]'>
-                            <img src={project.bgImage} alt='projImag' className='object-cover w-full h-full rounded-md brightness-50' />
-                            <img src={project.image} alt='projBg' className='absolute bg-center px-14 rounded-xl' />
+                            <div className='flex px-10 text-xs leading-loose uppercase transition-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12'>
+                                {project.frameworks.map((framework) => (
+                                    <p key={framework.id} className='text-black transition-colors duration-500 md:group-hover:text-white'>
+                                        {framework.name}
+                                    </p>
+                                ))}
+                            </div>
+
+                            <div className='relative flex items-center justify-center px-10 md:hidden h-[400px]'>
+                                <img src={project.bgImage} alt='projImag' className='object-cover w-full h-full rounded-md brightness-50' />
+                                <img src={project.image} alt='projBg' className='absolute bg-center px-14 rounded-xl' />
+                            </div>
+                        </div>
+                        <div id={`overlay_${index}`} className='w-full h-full absolute bg-black z-0' style={{ clipPath: "polygon(0 100%, 100% 100%, 100% 100%, 0 100%)" }}>
+
                         </div>
                     </div>
                 ))}

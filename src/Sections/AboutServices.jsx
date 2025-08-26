@@ -1,19 +1,15 @@
-import React, { useEffect, useRef } from 'react'
+import { useRef } from 'react'
 import TextComponent from '../Components/HeroComponents/TextComponent'
 import { servicesData } from '../Constants'
 import Card from '../Components/AboutServicesComponents/Card';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { useMediaQuery } from 'react-responsive';
-
 const AboutServices = () => {
     const isMobile = useMediaQuery({ maxWidth: 768 });
     const servicesRef = useRef([]);
     const serviceSecRef = useRef(null);
-
-
     useGSAP(() => {
-
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: serviceSecRef.current,
@@ -22,25 +18,16 @@ const AboutServices = () => {
                 scrub: true,
             }
         })
-
         tl.from(servicesRef.current, {
             xPercent: -100,
             opacity: 0,
             ease: "power1.inOut",
             stagger: 0.2
         })
-
-
-
-
-
     }, { scope: serviceSecRef });
-
-
     return (
         <section ref={serviceSecRef} id='services' className='min-h-screen rounded-t-4xl bg-black'>
             <TextComponent textColor={`white`} title={`Услуги`} inputText={`Создаю оптимизированные full-stack приложения с безопасной архитектурой и продуманным UX для стабильного роста бизнеса.`} paragraph={`Глубже интерфейса, дальше пикселей`} />
-
             {servicesData.map(({ title, description, items }, index) => (
                 <Card
                     title={title}
@@ -52,5 +39,4 @@ const AboutServices = () => {
         </section>
     )
 }
-
 export default AboutServices

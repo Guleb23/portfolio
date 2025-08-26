@@ -10,15 +10,17 @@ const GlobalNavbar = () => {
             path: "/",
             label: "Главная",
             rounded: "rounded-bl-2xl rounded-tl-2xl",
-            activeBg: "#3C2F2F", // DarkLava
-            activeText: "#ffffff"
+            activeBg: "#000000", // DarkLava
+            activeText: "#ffffff",
+            noneActiveText: "#000000"
         },
         {
             path: "/about",
             label: "Обо мне",
             rounded: "rounded-br-2xl rounded-tr-2xl",
             activeBg: "#e5e5e0", // amber-50
-            activeText: "#000000"
+            activeText: "#000000",
+            noneActiveText: "#ffffff"
         }
     ];
 
@@ -26,7 +28,7 @@ const GlobalNavbar = () => {
     const overlayRefs = useRef({});
 
     useEffect(() => {
-        routes.forEach(({ path, activeBg, activeText }) => {
+        routes.forEach(({ path, activeBg, activeText, noneActiveText }) => {
             const isActive = location.pathname === path;
             const overlay = overlayRefs.current[path];
             const textEl = textRefs.current[path];
@@ -43,7 +45,7 @@ const GlobalNavbar = () => {
                 gsap.to(textEl, { color: activeText, duration: 0.4 });
             } else {
                 tl.to(overlay, { width: '0%', duration: 0.4 });
-                gsap.to(textEl, { color: '#ffffff', duration: 0.4 }); // default text color
+                gsap.to(textEl, { color: noneActiveText, duration: 0.4 }); // default text color
             }
         });
     }, [location.pathname]);
