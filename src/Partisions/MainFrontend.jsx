@@ -30,16 +30,27 @@ const MainFrontend = () => {
 
     // Управление показом контента после загрузки
     useEffect(() => {
-        if (progress >= 100) {
-            const timeout = setTimeout(() => {
-                setIsReady(true);
-                // плавное скрытие лоадера
-                setTimeout(() => setShowLoader(false), 800);
-            }, 1500); // показываем лоадер минимум 1.5 сек
-
-            return () => clearTimeout(timeout);
+        if (progress === 100) {
+            setShowLoader(false);
         }
     }, [progress]);
+    useEffect(() => {
+        if (showLoader) {
+            const scrollY = window.scrollY;
+            document.body.style.position = 'fixed';
+            document.body.style.top = `-${scrollY}px`;
+            document.body.style.left = '0';
+            document.body.style.right = '0';
+            document.body.dataset.scrollY = scrollY; // сохраняем для восстановления
+        } else {
+            const scrollY = document.body.dataset.scrollY;
+            document.body.style.position = '';
+            document.body.style.top = '';
+            document.body.style.left = '';
+            document.body.style.right = '';
+            if (scrollY) window.scrollTo(0, parseInt(scrollY));
+        }
+    }, [showLoader]);
 
     // Плавное появление/исчезновение лоадера через GSAP
     useEffect(() => {
