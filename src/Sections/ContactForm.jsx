@@ -1,9 +1,8 @@
 import { useGSAP } from "@gsap/react";
-import Marquee from "../components/Marquee";
-
 import gsap from "gsap";
 import TextComponent from "../Components/HeroComponents/TextComponent";
 import socials from "../Constants";
+import Marquee from "../Components/Marquee";
 
 const Contact = () => {
     const text = `Есть вопрос или идея для проекта?<br/>
