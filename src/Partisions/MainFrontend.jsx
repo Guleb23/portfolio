@@ -97,7 +97,6 @@ const MainFrontend = () => {
             >
                 <Hero />
                 <Service />
-                <AboutServices />
                 <Work />
                 <Contact />
                 <ContactForm />

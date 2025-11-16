@@ -1,12 +1,5 @@
 import { FaGithub, FaTelegram } from "react-icons/fa";
 import { SiLeetcode } from "react-icons/si";
-
-
-
-
-
-
-
 const allFiles = import.meta.glob(
     '/public/assets/MyProjects/*/slides/*.{png,jpg,jpeg,webp}',
     { eager: false, as: 'raw' }
@@ -116,10 +109,6 @@ export const navLinks = [
     {
         name: 'Главная',
         id: 'hero'
-    },
-    {
-        name: 'Услуги',
-        id: 'services'
     },
     {
         name: 'Работы',
